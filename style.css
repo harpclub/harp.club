@@ -1,16 +1,15 @@
 /* =================================
-   カラーテーマ（全体設計）
+   カラーテーマ
 ================================= */
 :root{
-  --main:#4a6b5c;      /* 安心・信頼の深緑 */
-  --sub:#e7f0ec;       /* やさしい背景色 */
-  --accent:#cfa972;    /* CTA用アクセント */
-  --text:#333;
+  --main:#4a6b5c;
+  --accent:#cfa972;
   --bg:#f7f7f3;
+  --text:#333;
 }
 
 /* =================================
-   共通設定
+   基本設定
 ================================= */
 *{
   box-sizing:border-box;
@@ -19,20 +18,20 @@
 body{
   margin:0;
   font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
-  color:var(--text);
   background:var(--bg);
+  color:var(--text);
   line-height:1.8;
 }
 
-/* 画像はすべてレスポンシブ */
 img{
   max-width:100%;
   height:auto;
   display:block;
+  border-radius:14px;
 }
 
 /* =================================
-   レイアウト基本
+   レイアウト
 ================================= */
 section{
   padding:70px 20px;
@@ -43,7 +42,6 @@ section{
   margin:0 auto;
 }
 
-/* セクション交互配色（読みやすさ） */
 section:nth-of-type(even){
   background:#fff;
 }
@@ -56,16 +54,6 @@ h2{
   border-left:6px solid var(--main);
   padding-left:12px;
   margin-bottom:30px;
-}
-
-h3{
-  color:var(--main);
-  margin-top:20px;
-}
-
-strong{
-  color:var(--main);
-  font-weight:600;
 }
 
 /* =================================
@@ -83,10 +71,16 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  max-width:1000px;
-  margin:0 auto;
   padding:12px 20px;
+  max-width:1000px;
+  margin:auto;
 }
+
+.site-title{
+  font-weight:bold;
+}
+
+/* メニュー */
 
 .nav-menu{
   display:flex;
@@ -96,16 +90,21 @@ header{
 .nav-menu a{
   text-decoration:none;
   color:#333;
+  font-size:0.95rem;
 }
+
+/* お問い合わせボタン */
 
 .nav-apply{
   background:var(--main);
-  color:#fff;
+  color:#fff !important;
   padding:6px 16px;
   border-radius:999px;
 }
 
-/* ハンバーガー */
+/* =================================
+   ハンバーガー
+================================= */
 .hamburger{
   display:none;
   background:none;
@@ -114,13 +113,15 @@ header{
 }
 
 .hamburger span{
+  display:block;
   width:26px;
   height:3px;
   background:#333;
   margin:5px 0;
 }
 
-/* オーバーレイ */
+/* overlay */
+
 .overlay{
   position:fixed;
   inset:0;
@@ -128,7 +129,6 @@ header{
   opacity:0;
   pointer-events:none;
   transition:.3s;
-  z-index:900;
 }
 
 .overlay.show{
@@ -144,16 +144,60 @@ header{
   background:#f4f2ee;
 }
 
-.hero img{
+/* =================================
+   CTAボタン
+================================= */
+.btn{
+  display:inline-block;
+  background:var(--main);
+  color:#fff;
+  padding:14px 36px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+/* ===============================
+   写真ギャラリー最終版
+=============================== */
+
+.photo-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:center;
+}
+
+/* 写真サイズ統一 */
+
+.photo-grid img{
   width:100%;
-  max-width:520px;
-  margin:0 auto 20px;
+  height:auto;           /* ← 固定高さやめる */
+  object-fit:contain;    /* ← 見切れ防止 */
+  border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+
+/* スマホ */
+
+@media(max-width:768px){
+  .photo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .photo-grid img{
+    height:auto;
+  }
 }
 
 /* =================================
-   BOX / CARD
+   カード（説明・実績・流れ）
 ================================= */
-.box,
 .card{
   background:#fff;
   border-radius:16px;
@@ -161,88 +205,49 @@ header{
   box-shadow:0 6px 20px rgba(0,0,0,0.05);
 }
 
-/* =================================
-   安心してスタートできる3つのポイント
-================================= */
-#card-safety{
-  background:var(--sub);
-}
+/* 実績 */
 
-#card-safety ul{
+.achievements{
   list-style:none;
   padding:0;
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-  gap:20px;
 }
 
-#card-safety li{
+.achievements li{
   background:#fff;
-  border-radius:16px;
-  padding:24px 20px;
-  text-align:center;
-  font-weight:600;
-  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+  padding:18px;
+  border-radius:12px;
+  margin-bottom:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
 
-#card-safety li::before{
-  content:"✔";
-  display:block;
-  font-size:1.8rem;
-  color:var(--main);
-  margin-bottom:10px;
+/* 保護者の声 */
+
+.voice-box p{
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  margin-bottom:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
 }
 
-/* =================================
-   練習の流れ（図解風）
-================================= */
-#card-flow{
-  background:#f7f7f3;
-}
+/* 活動の流れ */
 
-#card-flow .flow-list{
+.flow-list{
   list-style:none;
   padding:0;
-  counter-reset:step;
 }
 
-#card-flow .flow-list li{
+.flow-list li{
   background:#fff;
-  border-radius:16px;
-  padding:20px 24px;
-  margin-bottom:24px;
-  box-shadow:0 4px 14px rgba(0,0,0,0.06);
-  position:relative;
-}
-
-#card-flow .flow-list li::before{
-  content:counter(step);
-  counter-increment:step;
-  position:absolute;
-  left:-14px;
-  top:20px;
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:var(--main);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:.9rem;
-}
-
-#card-flow strong{
-  display:block;
-  margin-bottom:6px;
+  padding:16px;
+  margin-bottom:12px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
 
 .flow-note{
   font-size:.9rem;
-  color:#555;
-  background:var(--sub);
-  padding:12px 16px;
-  border-radius:12px;
+  margin-top:10px;
 }
 
 /* =================================
@@ -255,75 +260,21 @@ header{
 }
 
 .instructor img{
-  max-width:240px;
-  border-radius:16px;
+  max-width:260px;
 }
 
 /* =================================
-   Q&A
+   FAQ iframe
 ================================= */
-.qa-full{
-  width:100%;
-}
-
 .qa-frame{
   width:100%;
   border:none;
-  overflow:hidden;
-}
-
-/* =================================
-   CTA（申込）統一
-================================= */
-.btn{
-  display:inline-block;
-  background:var(--accent);
-  color:#fff;
-  font-weight:700;
-  border-radius:999px;
-  padding:14px 36px;
-  text-decoration:none;
-}
-
-.btn:hover{
-  opacity:.9;
-}
-
-.hero .btn{
-  font-size:1.1rem;
-  padding:16px 44px;
-}
-
-.fixed-apply{
-  position:fixed;
-  right:16px;
-  bottom:16px;
-  background:var(--accent);
-  color:#fff;
-  border:none;
-  border-radius:999px;
-  padding:14px 22px;
-  font-weight:700;
-  z-index:1000;
-}
-
-/* =================================
-   QRコード
-================================= */
-.qr{
-  max-width:160px;
-  margin-top:20px;
 }
 
 /* =================================
    モバイル最適化
 ================================= */
-@media (max-width:768px){
-
-  body{
-    font-size:16px;
-    line-height:1.9;
-  }
+@media(max-width:768px){
 
   section{
     padding:50px 16px;
@@ -344,221 +295,57 @@ header{
     flex-direction:column;
     gap:20px;
     transition:.3s;
-    z-index:1000;
   }
 
   .nav-menu.show{
     right:0;
   }
 
+  .photo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .photo-grid img{
+    height:auto;
+  }
+
   .instructor{
     flex-direction:column;
     text-align:center;
-  }
-
-  .instructor img{
-    max-width:180px;
   }
 
   .btn{
     width:100%;
     text-align:center;
-    padding:16px 0;
   }
 }
 
 /* =================================
-   印刷・行政提出用
+   印刷用（行政提出対応）
 ================================= */
 @media print{
+  header,
+  .nav,
+  .hamburger,
+  .overlay,
+  .btn{
+    display:none !important;
+  }
 
   body{
     background:#fff;
     color:#000;
     font-size:11pt;
-    line-height:1.7;
-  }
-
-  header,
-  .nav,
-  .hamburger,
-  .overlay,
-  .fixed-apply,
-  footer,
-  .btn{
-    display:none !important;
-  }
-
-  .container{
-    max-width:100%;
-    margin:0;
-  }
-
-  .box,
-  .card{
-    background:none;
-    border:1px solid #000;
-    border-radius:0;
-    padding:16px;
-  }
-
-  .hero img{
-    max-width:300px;
-  }
-
-  .instructor{
-    flex-direction:row;
-  }
-
-  .instructor img{
-    width:160px;
-  }
-
-  a[href]:after{
-    content:" (" attr(href) ")";
-    font-size:9pt;
   }
 }
-
-/* 外部リンク（講師サイト） */
-.external-link{
-  color:var(--main);
-  text-decoration:underline;
-}
-
-.external-link:hover{
-  opacity:.8;
-}
-
-
-/* =================================
-   CD紹介ページ 共通
-================================= */
-
-/* ページ導入 */
-.cd-hero{
-  background:#f4f2ee;
+.photo-note{
   text-align:center;
+  margin-top:20px;
+  font-size:1.1rem;
+  font-weight:600;
+  color:#2f4f45;
+  background:#eef5f2;
+  padding:12px 20px;
+  border-radius:12px;
+  display:inline-block;
 }
-
-.cd-hero h1{
-  color:var(--main);
-  margin-bottom:14px;
-}
-
-.cd-hero p{
-  max-width:760px;
-  margin:0 auto;
-  font-size:0.95rem;
-  line-height:1.8;
-}
-
-/* =================================
-   CDアイテム
-================================= */
-
-.cd-item{
-  background:#fff;
-}
-
-.cd-flex{
-  display:flex;
-  gap:40px;
-  align-items:flex-start;
-}
-
-/* CDジャケット */
-.cd-flex img{
-  max-width:260px;
-  width:100%;
-  border-radius:14px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.12);
-}
-
-/* CD情報 */
-.cd-info h2{
-  color:var(--main);
-  margin-bottom:10px;
-}
-
-.cd-meta{
-  font-size:0.9rem;
-  color:#555;
-  margin-bottom:14px;
-}
-
-.cd-info p{
-  margin-bottom:12px;
-}
-
-/* 収録曲 */
-.cd-tracklist{
-  margin:16px 0;
-  padding-left:20px;
-  font-size:0.95rem;
-}
-
-.cd-tracklist li{
-  margin-bottom:6px;
-}
-
-/* 注記 */
-.cd-note{
-  font-size:0.85rem;
-  color:#666;
-  margin-top:12px;
-  line-height:1.6;
-}
-
-/* =================================
-   CD購入案内
-================================= */
-
-.cd-purchase{
-  background:#f7f7f3;
-}
-
-.cd-purchase h2{
-  color:var(--main);
-}
-
-.cd-purchase p{
-  max-width:760px;
-  margin:0 auto 12px;
-  text-align:center;
-}
-
-.cd-purchase .btn{
-  display:block;
-  width:fit-content;
-  margin:20px auto 0;
-}
-
-/* =================================
-   モバイル最適化
-================================= */
-
-@media (max-width:768px){
-
-  .cd-flex{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-
-  .cd-flex img{
-    max-width:200px;
-    margin-bottom:10px;
-  }
-
-  .cd-tracklist{
-    text-align:left;
-    display:inline-block;
-  }
-
-  .cd-info h2{
-    font-size:1.2rem;
-  }
-}
-
-
